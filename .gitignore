@@ -8,6 +8,9 @@ frontend/build/
 # Python virtual environment
 backend/venv/
 
+# Chroma database
+backend/chroma_db/
+
 # Python cache
 __pycache__/
 *.py[cod]
