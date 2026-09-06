@@ -11,6 +11,9 @@ backend/venv/
 # Chroma database
 backend/chroma_db/
 
+# Uploaded PDF files
+backend/uploads/
+
 # Python cache
 __pycache__/
 *.py[cod]
@@ -29,3 +32,6 @@ frontend/.env
 # Operating system
 .DS_Store
 Thumbs.db
+
+# Test PDF
+backend/sample.pdf
