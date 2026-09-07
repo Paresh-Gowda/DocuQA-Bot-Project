@@ -1,7 +1,9 @@
+import { useState } from "react";
 import PdfUpload from "../components/PdfUpload";
 import Summary from "../components/Summary";
 import ChatBox from "../components/ChatBox";
 function Home() {
+  const [uploaded, setUploaded] = useState(false);
   return (
     <main className="home">
       <section className="hero">
@@ -10,8 +12,8 @@ function Home() {
           Upload a PDF and use AI to summarize it and answer your questions.
         </p>
       </section>
-      <PdfUpload />
-      <Summary />
+      <PdfUpload onUploadSuccess={() => setUploaded(true)} />
+      <Summary uploaded={uploaded} />
       <ChatBox />
     </main>
   );
