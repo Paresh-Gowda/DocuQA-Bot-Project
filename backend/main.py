@@ -3,7 +3,6 @@ import uuid
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from pdf_service import load_pdf
 from document_service import (
     add_document,
     get_document,
