@@ -68,13 +68,10 @@ async def upload_pdf(file: UploadFile = File(...)):
                         detail="PDF file is too large. Maximum size is 10 MB."
                     )
                 buffer.write(chunk)
-        chunks = create_rag_chain(
+        vector_store, llm, prompt, pages, chunk_count = create_rag_chain(
             file_path,
             file_id
-        )[0]
-        documents = load_pdf(file_path)
-        pages = len(documents)
-        chunk_count = chunks._collection.count()
+        )
         add_document(
             file_id=file_id,
             filename=file.filename or "uploaded_document.pdf",

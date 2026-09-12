@@ -30,7 +30,7 @@ def create_rag_chain(pdf_path: str, file_id: str):
         Answer:
         """
     )
-    return vector_store, llm, prompt
+    return vector_store, llm, prompt, len(documents), len(chunks)
 def get_rag_chain(file_id: str):
     vector_store = get_vector_store(file_id)
     llm = get_llm()
@@ -69,10 +69,12 @@ def ask_question(
         document.page_content
         for document in documents
     )
-    formatted_prompt = prompt.invoke({
-        "context": context,
-        "question": question
-    })
+    formatted_prompt = prompt.invoke(
+        {
+            "context": context,
+            "question": question
+        }
+    )
     response = llm.invoke(formatted_prompt)
     content = response.content
     if isinstance(content, str):
