@@ -35,3 +35,5 @@ Thumbs.db
 
 # Test PDF
 backend/sample.pdf
+
+backend/documents.json

@@ -2,8 +2,13 @@ import { useState } from "react";
 import PdfUpload from "../components/PdfUpload";
 import Summary from "../components/Summary";
 import ChatBox from "../components/ChatBox";
+import DocumentHistory from "../components/DocumentHistory";
 function Home() {
-  const [uploaded, setUploaded] = useState(false);
+  const [uploaded, setUploaded] = useState(null);
+  const [refreshDocuments, setRefreshDocuments] = useState(0);
+  const handleNewDocument = () => {
+    setUploaded(null);
+  };
   return (
     <main className="home">
       <section className="hero">
@@ -12,9 +17,26 @@ function Home() {
           Upload a PDF and use AI to summarize it and answer your questions.
         </p>
       </section>
-      <PdfUpload onUploadSuccess={() => setUploaded(true)} />
+      <PdfUpload
+        onUploadSuccess={(fileId) => {
+          setUploaded(fileId);
+          setRefreshDocuments((value) => value + 1);
+        }}
+      />
+      <DocumentHistory
+        activeFileId={uploaded}
+        onSelectDocument={(fileId) => setUploaded(fileId)}
+        refreshTrigger={refreshDocuments}
+      />
+      {uploaded && (
+        <div className="new-document-container">
+          <button className="new-document-button" onClick={handleNewDocument}>
+            + New Document
+          </button>
+        </div>
+      )}
       <Summary uploaded={uploaded} />
-      <ChatBox />
+      <ChatBox fileId={uploaded} />
     </main>
   );
 }

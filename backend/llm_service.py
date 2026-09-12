@@ -2,7 +2,11 @@ import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 load_dotenv()
+_llm = None
 def get_llm():
-    return ChatGoogleGenerativeAI(
-        model="gemini-3.8-flash"
-    )
+    global _llm
+    if _llm is None:
+        _llm = ChatGoogleGenerativeAI(
+            model="gemini-3.8-flash"
+        )
+    return _llm
